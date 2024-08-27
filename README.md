@@ -13,10 +13,10 @@ Puedes instalarlas ejecutando los siguientes comandos en tu terminal:
 
 ```bash
 pip install customtkinter
-
+```
 ```bash
 pip install tkinter
-
+```
 ## Estructura del Proyecto
 El proyecto incluye los siguientes archivos y directorios:
 
