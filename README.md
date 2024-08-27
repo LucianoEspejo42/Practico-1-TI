@@ -17,6 +17,8 @@ pip install customtkinter
 ```bash
 pip install tkinter
 ```
+Una vez instaladas las librerias ejecuta el archivo "app.py"
+
 ## Estructura del Proyecto
 El proyecto incluye los siguientes archivos y directorios:
 
