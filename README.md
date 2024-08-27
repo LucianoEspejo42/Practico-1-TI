@@ -20,7 +20,7 @@ pip install tkinter
 ## Estructura del Proyecto
 El proyecto incluye los siguientes archivos y directorios:
 
-app.py: Archivo principal que inicia la aplicación.
-Ejercicio1.py: Módulo que contiene la implementación del ejercicio 1.
-Ejercicio2.py: Módulo que contiene la implementación del ejercicio 2.
-Ejercicio3.py: Módulo que contiene la implementación del ejercicio 3.
+- `app.py: Archivo principal que inicia la aplicación.`
+- `Ejercicio1.py: Módulo que contiene la implementación del ejercicio 1.`
+- `Ejercicio2.py: Módulo que contiene la implementación del ejercicio 2.`
+- `Ejercicio3.py: Módulo que contiene la implementación del ejercicio 3.`
