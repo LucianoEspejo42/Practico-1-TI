@@ -21,7 +21,7 @@ Una vez instaladas las librerias ejecuta el archivo "app.py"
 
 ## Estructura del Proyecto
 El proyecto incluye los siguientes archivos y directorios:
-
+- `file: En está carpeta se encuentran los archivos con los que hemos trabajado`
 - `app.py: Archivo principal que inicia la aplicación.`
 - `Ejercicio1.py: Módulo que contiene la implementación del ejercicio 1.`
 - `Ejercicio2.py: Módulo que contiene la implementación del ejercicio 2.`
