@@ -1,4 +1,4 @@
-# Práctico Teoría de la Información
+<h1 align="center"> Práctico Teoría de la Información </h1>
 
 Este es un programa desarrollado en Python que permite la ejecución de diversos ejercicios relacionados con Teoría de la Información, incluyendo la validación de archivos, cálculo de entropía, redundancia y capacidad de canal, entre otros.
 
