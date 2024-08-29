@@ -6,11 +6,15 @@ Este es un programa desarrollado en Python que permite la ejecución de diversos
 
 Antes de ejecutar el programa, asegúrate de tener instaladas las siguientes librerías:
 
+- `Numpy`
 - `customtkinter`
 - `tkinter`
 
 Puedes instalarlas ejecutando los siguientes comandos en tu terminal:
 
+```bash
+pip install numpy
+```
 ```bash
 pip install customtkinter
 ```
@@ -26,3 +30,6 @@ El proyecto incluye los siguientes archivos y directorios:
 - `Ejercicio1.py: Módulo que contiene la implementación del ejercicio 1.`
 - `Ejercicio2.py: Módulo que contiene la implementación del ejercicio 2.`
 - `Ejercicio3.py: Módulo que contiene la implementación del ejercicio 3.`
+- `Ejercicio4.py: Módulo que contiene la implementación del ejercicio 4.`
+- `Ejercicio5.py: Módulo que contiene la implementación del ejercicio 5.`
+- `Ejercicio7.py: Módulo que contiene la implementación del ejercicio 7.`
