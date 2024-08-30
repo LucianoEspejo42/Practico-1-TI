@@ -33,3 +33,5 @@ El proyecto incluye los siguientes archivos y directorios:
 - `Ejercicio4.py: Módulo que contiene la implementación del ejercicio 4.`
 - `Ejercicio5.py: Módulo que contiene la implementación del ejercicio 5.`
 - `Ejercicio7.py: Módulo que contiene la implementación del ejercicio 7.`
+- `Ejercicio8.py: Módulo que contiene la implementación del ejercicio 8.`
+- `Ejercicio9.py: Módulo que contiene la implementación del ejercicio 9.`
