@@ -1,19 +1,3 @@
-''' #Desarrollar una aplicación de software que calcule la Capacidad de Canal de un canal R-ario Uniforme y
-#No-Uniforme. El soft debe aceptar como entrada el valor de R que identifica al canal (R= 2 Binario, R=3
-#Ternario hasta R=4) los valores de probabilidades condicionales que representan la matriz del canal
-#entregando como salida el valor de las probabilidades independientes de cada uno de los símbolos de entrada
-#que maximiza la información mutua, esto es, lograr la capacidad de canal. '''
-
-
-''' entradas: 
-    tamaño de canal(2,3,4)
-    tipo de canal(uniforme/no uniforme)
-    probabilidades(1 fila para uniforme, n filas para no uniforme)
-Salida:
-    p(ai) para lograr capacidad de canal(p(a)equiprobables en canal uniforme/no uniforme)
-    capacidad de canal
- '''
-#TODO 
 from tkinter import messagebox
 import numpy as np
 import math
@@ -23,7 +7,7 @@ def calcular_capacidad(matriz, tamanio_canal):
     try:
         probabilidades_entrada=[]
         
-        #creo las probabilidades de entrada
+        #se crean las probabilidades de entrada
         for i in range(tamanio_canal):
             probabilidades_entrada.append(1/tamanio_canal)
             
@@ -34,7 +18,7 @@ def calcular_capacidad(matriz, tamanio_canal):
         probabilidades_salida=[] #p(bj)
         probabilidades_condicionales=[] #p(bj/ai)
         
-        #calculo H(B)
+        #calcula H(B)
         for i in range(tamanio_canal):
             pb=0
             for j in range(tamanio_canal):
@@ -43,7 +27,7 @@ def calcular_capacidad(matriz, tamanio_canal):
             probabilidades_salida.append(pb)
             entropia_salida+= pb*math.log2(1/pb)
 
-        #calculo H(B/A)
+        #calcula H(B/A)
         for i in range(tamanio_canal):
             pcondicional=0
             for j in range(tamanio_canal):
