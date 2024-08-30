@@ -1,70 +1,78 @@
-from Caracter import Caracter
+"""Enunciado: Desarrollar un programa para comparar dos cadenas, no en forma tradicional (carácter por carácter), 
+sino que implemente un algoritmo, propuesto por Ud., que determine el parecido, 
+por ejemplo de cadenas como: Juan Perez y Jaun Perez, Horacio López y Oracio López, 
+cadenas que si se tratan en comparando carácter por carácter, son muy poco parecidas o incluso no se parecen en nada.
+"""
+
+from math import floor
+import tkinter as tk
 from tkinter import messagebox
 
-"""
-Reglas para asignar puntos:
-+4      -> Igual cantidad de símbolo y mismo orden
--0.5    -> Por cada símbolo de difenrencia en longitud
-+2      -> Si tienen distinta cantidad pero todos los símbolos en la misma posición
--0.5    -> Por cada símbolo en posición diferente
-+0      -> No comparten el símbolo
-"""
+def distancia(s1, s2):
+	
+	# Si las cadenas son iguales
+	if (s1 == s2):
+		return 1.0
 
-#Genera la lista de los caracteres con sus datos de interes
-def GenerarListaCaracteres(cadena, caracteres1):
-    aux = None
-    for char in cadena:
-        aux = BuscarCaracter(char, caracteres1)
-        if aux != None:
-            aux.incrCantidad()
-            aux.appendPosition(cadena.index(char, aux.getLastPosition()+1))
-            #Si una letra se repite varias veces dentro de la cadena buscamos 
-            # a partir del siguiente del último encontrado            
-        else:
-            caracteres1.append(Caracter(char, cadena.index(char, 0)))
+	# Longitud de las dos cadenas
+	l1 = len(s1)
+	l2 = len(s2)
 
-#Busca el caracter dentro de la lista
-def BuscarCaracter(buscado, caracteres):
-    for caracterObjeto in caracteres:
-        if caracterObjeto.getCaracter() == buscado:
-            return caracterObjeto
-    return None
+	# Maxima distancia de match permitida
+	max_dist = floor(max(l1, l2) / 2) - 1
 
-#Compara las listas de posiciones y resta puntos
-def CompararPosiciones(pos1, pos2):
-    #pos1=[1,2,3]   pos2=[2,3,4]
-    #Inicializamos los puntos
-    if len(pos1) == len(pos2):
-        puntos = 4
-    else:
-        puntos = 2
-    if pos1 == pos2:
-        return puntos
-    
-    for p1 in pos1:
-        if not (pos2.__contains__(p1)):
-            puntos -= 0.5
-        if puntos <= 0:
-            return 0
-    return puntos
+	# Contador de coincidencias
+	match = 0
 
-def main (p1, p2):
-    try:
-        caracteres1 = []
-        caracteres2 = []
-        puntuacion = int(0)
-        aux = None
-        GenerarListaCaracteres(p1.upper(), caracteres1)
-        GenerarListaCaracteres(p2.upper(), caracteres2)
+	# Hash para las coincidencias
+	hash_s1 = [0] * len(s1)
+	hash_s2 = [0] * len(s2)
 
-        for char in caracteres1:
-            aux = BuscarCaracter(char.getCaracter(), caracteres2)
-            if aux != None:
-                puntuacion += CompararPosiciones(char.getPositions(), aux.getPositions())
-            #else: suma cero puntos
-        # len(caracteres1)*4 es igual a la máxima puntiación que pueden tener
-        # 0.5*(abs(len(p1) - len(p2))) es para descontar si hay longitud desigual
-        puntuacion = puntuacion*100 / (len(caracteres1)*4 - 0.5*(abs(len(p1) - len(p2))))
-        messagebox.showinfo("Resultado de la comparación",f"Las cadenas {p1} y {p2} tienen un parecido de: {puntuacion}%")
-    except ZeroDivisionError as e:
-        messagebox.showerror("Error", f"Error en los valores ingresados: {e}")
+
+	for i in range(l1):
+
+		# Buscar coincidencias
+		for j in range(max(0, i - max_dist), 
+					min(l2, i + max_dist + 1)):
+			
+			# Si hay coincidencia
+			if (s1[i] == s2[j] and hash_s2[j] == 0):
+				hash_s1[i] = 1
+				hash_s2[j] = 1
+				match += 1
+				break
+
+	# Si no hay coincidencias
+	if (match == 0):
+		return 0.0
+
+	# Cantidad de trasposiciones
+	t = 0
+	point = 0
+
+	# Contar numero de ocurrencias donde dos caracteres coincidan, pero hay una tercer coincidencia entre los indices
+	for i in range(l1):
+		if (hash_s1[i]):
+
+			# Encontrar el siguiente caracter coincidente
+			while (hash_s2[point] == 0):
+				point += 1
+
+			if (s1[i] != s2[point]):
+				t += 1
+			point += 1
+	t = t//2
+
+	# Devuelve la distancia
+	return (match/ l1 + match / l2 +
+			(match - t) / match)/ 3.0
+
+
+# Función que procesa las cadenas
+def procesar_cadenas(entrada1, entrada2):
+    cadena1 = entrada1.get()
+    cadena2 = entrada2.get()
+    # Aquí puedes definir la lógica que deseas aplicar a las cadenas
+    resultado = f"Cadena 1: {cadena1}\nCadena 2: {cadena2}\nSimilitud: {round(distancia(cadena1, cadena2), 6)}%"
+    messagebox.showinfo("Resultado de la comparación", resultado)
+
