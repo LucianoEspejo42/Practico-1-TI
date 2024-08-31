@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 import os
 #Importar los ejercicios
-import Ejercicio1, Ejercicio2, Ejercicio3, Ejercicio4, Ejercicio7
+import Ejercicio1, Ejercicio2, Ejercicio3, Ejercicio4, Ejercicio7, Ejercicio8
 
 class Aplicacion(object):
     def __init__(self, app) -> None:
@@ -18,7 +18,7 @@ class Aplicacion(object):
         app.resizable(False, False)
 
         # Colocando título
-        label_title = ctk.CTkLabel(app, text="Práctico Teoría de la Información", font=("Arial", 24))
+        label_title = ctk.CTkLabel(self.__app, text="Práctico Teoría de la Información", font=("Arial", 24))
         label_title.pack(pady=10, padx=5)
 
         #Creando frames para colocar los botones y mostrar los resultados
@@ -33,8 +33,8 @@ class Aplicacion(object):
                 |__...___|  |                              |
                 |__Ej9___|  |______________________________|
         """
-        frame1 = ctk.CTkFrame(app)
-        self.frame2 = ctk.CTkFrame(app)
+        frame1 = ctk.CTkFrame(self.__app)
+        self.frame2 = ctk.CTkFrame(self.__app)
         frame1.pack(side='left', pady=40, padx=25, fill='y')
         self.frame2.pack(side='left', pady=40, padx=25, fill='both', expand=True)
     
@@ -76,6 +76,9 @@ class Aplicacion(object):
             widget.destroy()
 
     def mostrar_enunciado(self, frame, ejercicio):
+
+        if self.contador_archivo != 0:
+            self.contador_archivo = 0
         # Limpia el frame antes de mostrar el nuevo enunciado
         self.destruir_ventana(frame)
 
@@ -129,6 +132,14 @@ class Aplicacion(object):
                 "sino que implemente un algoritmo, propuesto por Ud., que determine el parecido, por ejemplo\n" 
                 "de cadenas como: Juan Perez y Jaun Perez, Horacio López y Oracio López, cadenas que si se tratan en\n"
                 "comparando carácter por carácter, son muy poco parecidas o incluso no se parecen en nada."
+            ),
+            "Ejercicio 8": (
+                "Implementar un programa que valide un CUIT/CUIL ingresado por teclado."
+            ),
+            "Ejercicio 9": (
+                "Este ejercicio no se encuentra hecho en esta aplicación por que se nos dificulto la\n"
+                "implementación del mismo, le recomiendo que lo ejecute por terminal\n"
+                "Gracias y disculpas"
             )
         }
 
@@ -138,17 +149,20 @@ class Aplicacion(object):
 
         # Mostrar el botón "Resolver" debajo del enunciado
         if ejercicio == 'Ejercicio 6':
-            resolver_button = ctk.CTkButton(frame, text="Abrir el archivo .docx", command= lambda: self.procesar_ejercicio6())
+            resolver_button = ctk.CTkButton(frame, text="Abrir el archivo .docx", command= lambda: self.procesar_ejercicio6(ruta=r"\Práctico Maquina\Ejercicio6(Resolución).docx"))
             resolver_button.pack(side='top',pady=10, anchor='center')
 
         if ejercicio != 'Ejercicio 5' and ejercicio != 'Ejercicio 6' and ejercicio != 'Ejercicio 9':
+            if ejercicio == 'Ejercicio 3':
+                resolver_button = ctk.CTkButton(frame, text="Ver comparacion", command= lambda: self.procesar_ejercicio6(ruta=r"\Práctico Maquina\Comparación Ejercicio 3.docx"))
+                resolver_button.pack(side='top',pady=10, anchor='center')
             resolver_button = ctk.CTkButton(frame, text="Resolver", command= lambda: self.resolver_enunciado(frame, ejercicio))
             resolver_button.pack(side='top',pady=10, anchor='center')
 
     def resolver_enunciado (self, frame, ejercicio):
         list_file = ['Ejercicio 1','Ejercicio 2','Ejercicio 3']
         self.destruir_ventana(frame)
-        if ejercicio in list_file:
+        if ejercicio in list_file:    
             self.label_enunciado = ctk.CTkButton(self.frame2, text="Seleccione Archivo", command=lambda: self.seleccion_archivo(ejercicio, frame))
             self.label_enunciado.pack(expand=True)
         else:
@@ -156,6 +170,8 @@ class Aplicacion(object):
                 self.procesar_ejercicio4(frame)
             elif ejercicio == 'Ejercicio 7':
                 self.procesar_ejercicio7(frame)
+            elif ejercicio == 'Ejercicio 8':
+                self.procesar_ejercicio8(frame)
 
     def seleccion_archivo (self, ejercicio, frame):
         if ejercicio == "Ejercicio 1":
@@ -180,6 +196,7 @@ class Aplicacion(object):
 
 
     def procesar_ejercicio1 (self, file, namefile, frame):
+
         self.destruir_ventana(frame)
         if Ejercicio1.validar_archivo_wav(file):
             cabecera = Ejercicio1.mostrar_cabecera_wav(file,namefile)
@@ -195,6 +212,7 @@ class Aplicacion(object):
             label_enunciado.pack(expand=True)
 
     def procesar_ejercicio2 (self, file, namefile, frame):
+
         self.destruir_ventana(frame)
         if Ejercicio2.validar_archivo_bmp(file):
             cabecera = Ejercicio2.mostrar_cabecera_bmp(file,namefile)
@@ -220,7 +238,9 @@ class Aplicacion(object):
         self.mostrar_enunciado(frame, ejercicio)
 
     def procesar_ejercicio3 (self, file, namefile, frame):
+
         self.destroy_button("Ejercicio 3")
+
         lista_mostrar = Ejercicio3.procesar_archivo(file, namefile)
         label_cabecera = ctk.CTkLabel(self.frame2, text=lista_mostrar, font=("Arial",18), justify="center")
         label_cabecera.pack(pady=10)
@@ -229,7 +249,7 @@ class Aplicacion(object):
         if self.contador_archivo >= 5:
             self.contador_archivo = 0
             self.destroy_button("Ejercicio 3")
-            self.boton_retroceder = ctk.CTkButton(self.frame2, text="Atras", command= lambda: self.retroceder_al_ej_3(frame,"Ejercicio 3"), bg_color='red')
+            self.boton_retroceder = ctk.CTkButton(self.frame2, text="Atras", command= lambda: self.retroceder_al_ej_3(frame,"Ejercicio 3"))
             self.boton_retroceder.pack(padx=10)
         else:
             self.label_enunciado = ctk.CTkButton(self.frame2, text="Seleccionar otro archivo", command=lambda: self.seleccion_archivo("Ejercicio 3", frame))
@@ -237,6 +257,7 @@ class Aplicacion(object):
     
     #En esta función se procesa el eejrcicio 4
     def procesar_ejercicio4 (self, frame):
+
         # Botón para seleccionar canal 
         self.button_binario = ctk.CTkButton(frame, text="Canal Binario", command=lambda: self.mostrar_matriz(long=2,placex=7,placey=300,num1=10,num2=140))
         self.button_ternario = ctk.CTkButton(frame, text="Canal Ternario", command= lambda: self.mostrar_matriz(long=3,placex=22.5,placey=350))
@@ -276,21 +297,23 @@ class Aplicacion(object):
         self.button_calcular = ctk.CTkButton(self.frame2, text="Calcular", command= lambda: Ejercicio4.main(self.entry_matrix))
         self.button_calcular.place(x=offset_x + long * placex, y= placey)
 
-    def procesar_ejercicio6 (self):
-            path = os.path.dirname(__file__)
-            ruta_archivo = path + r"\file\Ejercicio 6.docx"
-         
-            try:
-                # Intentar abrir el archivo usando la aplicación predeterminada del sistema
-                if os.name == 'nt':  # Windows
-                    os.startfile(ruta_archivo)
-                elif os.name == 'posix':  # MacOS o Linux
-                    subprocess.call(['open', ruta_archivo] if os.uname().sysname == 'Darwin' else ['xdg-open', ruta_archivo])
-            except Exception as e:
-                # Mostrar un cuadro de mensaje de error
-                messagebox.showerror("Error", "Parece que hubo un problema al abrir el archivo, por favor inténtelo de manera manual.")
+    def procesar_ejercicio6 (self, ruta):
+
+        path = os.path.dirname(__file__)
+        ruta_archivo = path + ruta
+        
+        try:
+            # Intentar abrir el archivo usando la aplicación predeterminada del sistema
+            if os.name == 'nt':  # Windows
+                os.startfile(ruta_archivo)
+            elif os.name == 'posix':  # MacOS o Linux
+                subprocess.call(['open', ruta_archivo] if os.uname().sysname == 'Darwin' else ['xdg-open', ruta_archivo])
+        except Exception as e:
+            # Mostrar un cuadro de mensaje de error
+            messagebox.showerror("Error", "Parece que hubo un problema al abrir el archivo, por favor inténtelo de manera manual.")
 
     def procesar_ejercicio7 (self, frame):
+
         self.destruir_ventana(frame)
 
         # Crear un frame para centrar el contenido
@@ -310,8 +333,24 @@ class Aplicacion(object):
         cadena_dos.pack(padx=15, pady=10)
 
         # Botón de comparación
-        boton_comparar = ctk.CTkButton(frame_centro, text="Comparar Cadenas", command=lambda: Ejercicio7.main(cadena_uno.get(), cadena_dos.get()))
+        boton_comparar = ctk.CTkButton(frame_centro, text="Comparar Cadenas", command=lambda: Ejercicio7.procesar_cadenas(cadena_uno, cadena_dos))
         boton_comparar.pack(pady=20)
+
+    def procesar_ejercicio8 (self, frame):
+
+        self.destruir_ventana(frame)
+        # Crear y ubicar los widgets
+        etiqueta = ctk.CTkLabel(frame, text="Ingrese el CUIT/CUIL (formato XX-XXXXXXXX-X):", font=("Arial", 18), wraplength=500, justify='center')
+        etiqueta.pack(padx=10, pady=(20, 10))
+
+        entrada_codigo = ctk.CTkEntry(frame, width=180, height=30, justify='center')
+        entrada_codigo.pack(padx=15, pady=10)
+        
+        etiqueta_resultado = ctk.CTkLabel(frame, text="", font=("Arial", 18), wraplength=500, justify='center')
+        etiqueta_resultado.pack(padx=10, pady=10)
+
+        boton_validar = ctk.CTkButton(frame, text="Validar", command=lambda: Ejercicio8.procesar_codigo(entrada_codigo, etiqueta_resultado))
+        boton_validar.pack(padx=10, pady=20)
 
 
 if __name__ == '__main__':
