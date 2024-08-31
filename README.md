@@ -4,7 +4,7 @@ En este repositorio se encuentra todo lo referido al práctico 1 de Teoría de l
 
 Puede visualizar el práctico escrito haciendo click en algun 
 
-[![Download as PDF Button](https://img.shields.io/badge/Download%20AS%20pdf-EF3939?style=for-the-badge&logo=adobeacrobatreader&logoColor=white&color=black&labelColor=ec1c24)](PrácticoTI/Práctico1TeoríadeInformaciónEntropía.pdf)
+[![Download as PDF Button](https://img.shields.io/badge/Ver%20pdf-EF3939?style=for-the-badge&logo=adobeacrobatreader&logoColor=white&color=black&labelColor=ec1c24)](PrácticoTI/Práctico1TeoríadeInformaciónEntropía.pdf)
 
 ## Requisitos
 
