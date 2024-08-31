@@ -1,46 +1,98 @@
-from Persona import PersonaFija, PersonaVariable
+# -*- coding: latin-1 -*-
+
+#from re import L
+from persona import personaFija, personaVariable
 import os
 import csv
 
-def CrearDatFijo(lista, path):
-    file = open(path+"\\DatPersonasFijo.dat", "w")
+def crearFijoDat(lista, path):
+    file = open(os.path.join(path, 'fijo.dat'), 'w')  # Une al path correctamente
     for p in lista:
-        file.writelines([p.ApNom, p.Dir, p.Dni, p.EstudiosP, p.EstudiosS, p.EstudiosU, p.Casa, p.ObraSocial, p.Trabaja, p.Auto, p.Jubilado])
-    file.close
+        file.writelines([p.NomAp, p.Dir, p.Dni, p.EstudiosP, p.EstudiosS, p.EstudiosU, p.Hogar, p.ObraSocial, p.Trabaja, p.Mascota, p.Computadora])
+    #file.close()  
 
-def LeerDatFijo(path):
-    file = open(path+"\\DatPersonas.dat", "r")
-    for p in file:
-        print(p)
+def leerFijoDat(path):
+    with open(os.path.join(path, 'fijo.dat'), 'r') as file:
+        i = 1
+        while True:
+            NomAp = file.read(30).strip()
+            if not NomAp:  # Termina si no hay m�s datos
+                break
+            print(f"|-----------Datos Persona {i}------------|")
+            Dir = file.read(40).strip()
+            Dni = file.read(8).strip()
+            EstudiosP = file.read(1)
+            EstudiosS = file.read(1)
+            EstudiosU = file.read(1)
+            Hogar = file.read(1)
+            ObraSocial = file.read(1)
+            Trabaja = file.read(1)
+            Mascota = file.read(1)
+            Computadora = file.read(1)
+            imprimir = f"Nombre y Apellido: {NomAp}\nDireccion: {Dir}\nDNI: {Dni}\nEstudios Primarios: {EstudiosP}\nEstudios Secundarios: {EstudiosS}\nEstudios Universitarios: {EstudiosU}\nHogar Propio: {Hogar}\nObra Social: {ObraSocial}\nTrabaja: {Trabaja}\nMascota: {Mascota}\nComputadora: {Computadora}"
+            #print(f"{NomAp}, {Dir}, {Dni}, {EstudiosP}, {EstudiosS}, {EstudiosU}, {Hogar}, {ObraSocial}, {Trabaja}, {Mascota}, {Computadora}")
+            print(imprimir)
+            i += 1
+            
+def crearVariableDat(lista, path):
+    with open(os.path.join(path, 'variable.dat'), 'w') as file:
+        for p in lista:
+            file.write(f"{len(p.NomAp):02d}" + p.NomAp)  # Longitud y campo
+            file.write(f"{len(p.Dir):02d}" + p.Dir)
+            file.write(p.Dni)
+            file.write(str(p.ByteBi).zfill(3))  # Asegura que el ByteBi se escribe correctamente
 
-def CrearDatVariable(lista, path):
-    file = open(path+"\\DatPersonasVariable.dat", "w")
-    for p in lista:
-        file.write(str(len(p.ApNom)))
-        file.write(p.ApNom)
-        file.write(str(len(p.Dir)))
-        file.write(p.Dir)
-        file.write(p.Dni)
-        file.write(str(p.ByteBivaluado))
-    file.close()
 
+def leerVariableDat(path):
+    with open(os.path.join(path, 'variable.dat'), 'r') as file:
+        while True:
+            length = file.read(2)
+            if not length or not length.isdigit():
+                print("Fin de archivo o longitud no valida.")
+                break
+            print(f"Length leido: {length}")  # Verifica el valor de length
+            try:
+                NomAp = file.read(int(length))
+            except ValueError:
+                print(f"Error: valor invalido '{length}' para conversion a int.")
+                break
+
+            length = file.read(2)
+            if not length or not length.isdigit():
+                print("Fin de archivo o longitud no valida.")
+                break
+
+            Dir = file.read(int(length))
+            Dni = file.read(8)
+            ByteBi = file.read(3).strip()  # Ajuste para leer el ByteBi de 3 d�gitos si se escribi� con zfill(3)
+            print(f"{NomAp}, {Dir}, {Dni}, {ByteBi}")
+
+def comparar_tamanios(path):
+    fijo_size = os.path.getsize(os.path.join(path, 'fijo.dat'))
+    variable_size = os.path.getsize(os.path.join(path, 'variable.dat'))
+    print(f"Tamaño del archivo de longitud fija: {fijo_size} bytes")
+    print(f"Tamaño del archivo de longitud variable: {variable_size} bytes")
 
 if __name__ == "__main__":
     listaF = []
     listaV = []
-    path = os.path.dirname(__file__)
-    with open(os.path.join(path+"\\DatosPersonas.csv")) as File:
-        reader = csv.reader(File, delimiter=';')
+    path = os.path.dirname(__file__) # Obtiene la ruta del script actual
+    csv_path = os.path.join(path, 'file', 'persona.csv')
+
+    with open(csv_path, newline='', encoding='utf-8', errors='replace') as File: #utf-8 para caracteres especiales
+        reader = csv.reader(File, delimiter = ';')
         for f in reader:
-            #Creamos las dos listas al mismo tiempo para despues escribir los archivos
-            listaF.append(PersonaFija(f[0], f[1], f[2], f[3], f[4], f[5], f[6], f[7], f[8], f[9], f[10]))
-            listaV.append(PersonaVariable(f[0], f[1], f[2], f[3], f[4], f[5], f[6], f[7], f[8], f[9], f[10]))
-        File.close
+            #print(f, len(f))  # Verifica el contenido y la cantidad de elementos en la lista `f`
+            listaF.append(personaFija(*f)) # *f para desempaquetar, va por cada uno de los campos.
+            listaV.append(personaVariable(*f))
+
+    crearFijoDat(listaF, path)
+    crearVariableDat(listaV, path)
+
+    print("Datos leidos del archivo de longitud fija:")
+    leerFijoDat(path)
     
-    for d in listaV:
-        d.Mostrar()
-        print("\n")
-    
-    CrearDatFijo(listaF, path)
-    LeerDatFijo(path)
-    CrearDatVariable(listaV, path)
+    print("\nDatos leidos del archivo de longitud variable:")
+    leerVariableDat(path)
+
+    comparar_tamanios(path)
