@@ -31,6 +31,8 @@ Una vez instaladas las librerias ejecuta el archivo "app.py"
 
 ## Estructura del Proyecto
 El proyecto incluye los siguientes archivos y directorios:
+- `Práctico Maquina: En está carpeta se encuentran los archivos del Ejercicio 3 y 6`
+- `PrácticoTI: En está carpeta se encuentran la resolución del práctico escrito`
 - `file: En está carpeta se encuentran los archivos con los que hemos trabajado`
 - `app.py: Archivo principal que inicia la aplicación.`
 - `Ejercicio1.py: Módulo que contiene la implementación del ejercicio 1.`
