@@ -22,26 +22,28 @@ def calcular_redundancia(entropia, num_simbolos):
 
 def procesar_archivo(archivo, name_file):
     list_ejercicio = []
-    with open(archivo, 'rb') as file:
-        contenido = file.read()
+    try:
+        with open(archivo, 'rb') as file:
+            contenido = file.read()
 
-    # Contar la frecuencia de cada byte en el archivo
-    contador = Counter(contenido)
-    
-    # Calcular la probabilidad de cada símbolo
-    total_simbolos = sum(contador.values())
-    probabilidades = [freq / total_simbolos for freq in contador.values()]
-    
-    # Número de símbolos únicos
-    num_simbolos = len(contador)
+        # Contar la frecuencia de cada byte en el archivo
+        contador = Counter(contenido)
+        
+        # Calcular la probabilidad de cada símbolo
+        total_simbolos = sum(contador.values())
+        probabilidades = [freq / total_simbolos for freq in contador.values()]
+        
+        # Número de símbolos únicos
+        num_simbolos = len(contador)
 
-    # Calcular entropía y redundancia
-    entropia = calcular_entropia(probabilidades)
-    redundancia = calcular_redundancia(entropia, num_simbolos)
+        # Calcular entropía y redundancia
+        entropia = calcular_entropia(probabilidades)
+        redundancia = calcular_redundancia(entropia, num_simbolos)
 
-    list_ejercicio.append(f"Nombre del archivo: {name_file}")
-    list_ejercicio.append(f"Entropia: {entropia:.4f} bits/símbolo")
-    list_ejercicio.append(f"Redundancia: {redundancia:.4f}")
+        list_ejercicio.append(f"Nombre del archivo: {name_file}")
+        list_ejercicio.append(f"Entropia: {entropia:.4f} bits/símbolo")
+        list_ejercicio.append(f"Redundancia: {redundancia:.4f}")
 
-    return "\n".join(list_ejercicio)
-
+        return "\n".join(list_ejercicio)
+    except Exception as e:
+        return e
