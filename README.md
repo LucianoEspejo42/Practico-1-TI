@@ -2,9 +2,9 @@
 
 En este repositorio se encuentra todo lo referido al práctico 1 de Teoría de la Información. Puede encontrar en el mismo los archivos PDF que dan resolución al práctico escrito, así como también el programa realizado en Python que permite la validación de archivos, cálculo de entropía, redundancia y capacidad de canal, entre otros.
 
-Puede visualizar el práctico escrito haciendo click en algun 
+## Práctico Escrito
 
-[![Download as PDF Button](https://img.shields.io/badge/Ver%20pdf-EF3939?style=for-the-badge&logo=adobeacrobatreader&logoColor=white&color=black&labelColor=ec1c24)](PrácticoTI/Práctico1TeoríadeInformaciónEntropía.pdf)
+- `[![Download as PDF Button](https://img.shields.io/badge/Ver%20pdf-EF3939?style=for-the-badge&logo=adobeacrobatreader&logoColor=white&color=black&labelColor=ec1c24)](PrácticoTI/Práctico1TeoríadeInformaciónEntropía.pdf)`
 
 ## Requisitos
 
