@@ -1,8 +1,8 @@
 <h1 align="center"> Práctico Teoría de la Información </h1>
 
-Este es un programa desarrollado en Python que permite la ejecución de diversos ejercicios relacionados con Teoría de la Información, incluyendo la validación de archivos, cálculo de entropía, redundancia y capacidad de canal, entre otros.
+En este repositorio se encuentra todo lo referido al práctico 1 de Teoría de la Información. Puede encontrar en el mismo los archivos PDF que dan resolución al práctico escrito, así como también el programa realizado en Python que permite la validación de archivos, cálculo de entropía, redundancia y capacidad de canal, entre otros.
 
-## Documentación
+Puede visualizar el práctico escrito haciendo click en algun 
 
 ## Requisitos
 
