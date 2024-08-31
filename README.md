@@ -4,7 +4,7 @@ Este es un programa desarrollado en Python que permite la ejecución de diversos
 
 ## Documentación
 
-[![Download as PDF Button](https://img.shields.io/badge/Download%20AS%20pdf-EF3939?style=for-the-badge&logo=adobeacrobatreader&logoColor=white&color=black&labelColor=ec1c24)](https://mdtopdf.up.railway.app/convertPdf?url=<url>)
+[![Ver Pdf](https://img.shields.io/badge/Download%20AS%20pdf-EF3939?style=for-the-badge&logo=adobeacrobatreader&logoColor=white&color=black&labelColor=ec1c24)](Práctico TI/Práctico 1 - Teoría de Información - Entropía.pdf)
 
 
 <a href="Práctico TI/Práctico 1 - Teoría de Información - Entropía.pdf" target="_blank">
