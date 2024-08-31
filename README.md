@@ -8,7 +8,7 @@ Este es un programa desarrollado en Python que permite la ejecución de diversos
 
 
 <a href="Práctico TI/Práctico 1 - Teoría de Información - Entropía.pdf" target="_blank">
-  <img src="https://img.shields.io/badge/Abrir%20PDF-Documentación-blue?style=for-the-badge" alt="Abrir PDF">
+  <img src="https://img.shields.io/badge/Abrir%20PDF-Documentación-blue?style=for-the-badge" alt="Abrir PDF: Teoría de la información - Entropía">
 </a>
 
 
