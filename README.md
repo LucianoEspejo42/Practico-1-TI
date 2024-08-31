@@ -4,14 +4,6 @@ Este es un programa desarrollado en Python que permite la ejecución de diversos
 
 ## Documentación
 
-[![Ver Pdf](https://img.shields.io/badge/Download%20AS%20pdf-EF3939?style=for-the-badge&logo=adobeacrobatreader&logoColor=white&color=black&labelColor=ec1c24)](PrácticoTI/Práctico1-TeoríadeInformación-Entropía.pdf)
-
-
-<a href="Práctico TI/Práctico 1 - Teoría de Información - Entropía.pdf" target="_blank">
-  <img src="https://img.shields.io/badge/Abrir%20PDF:%20Teoría de la información Entropía-Documentación-blue?style=for-the-badge" alt="Abrir PDF: Teoría de la información - Entropía">
-</a>
-
-
 ## Requisitos
 
 Antes de ejecutar el programa, asegúrate de tener instaladas las siguientes librerías:
