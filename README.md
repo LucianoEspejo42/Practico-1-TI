@@ -8,6 +8,8 @@ En esta sección encuentra la resolución a las primeras dos partes del práctic
 
 [![Download as PDF Button](https://img.shields.io/badge/Resolución%20Práctico%201-EF3939?style=for-the-badge&logo=adobeacrobatreader&logoColor=white&color=black&labelColor=ec1c24)](PrácticoTI/Práctico1TeoríadeInformaciónEntropía.pdf)
 
+[![Download as PDF Button](https://img.shields.io/badge/Resolución%20Práctico%202-EF3939?style=for-the-badge&logo=adobeacrobatreader&logoColor=white&color=black&labelColor=ec1c24)](PrácticoTI/PrácticoCanaldeInformación.pdf)
+
 ## Requisitos
 
 Antes de ejecutar el programa, asegúrate de tener instaladas las siguientes librerías:
