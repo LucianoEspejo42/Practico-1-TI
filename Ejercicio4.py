@@ -21,41 +21,49 @@ import math
 
 def calcular_capacidad(matriz, tamanio_canal):
     try:
-        probabilidades_entrada=[]
-        
-        #creo las probabilidades de entrada
-        for i in range(tamanio_canal):
-            probabilidades_entrada.append(1/tamanio_canal)
+        maxima_entropia = 0
+        probabilidad1 = 0
+        probabilidad2 = 0
+        for x in range(0, 100):
+            probabilidades_entrada=[x/100, 1-x/100]
             
-        #calculo capacidad de canal
-        capacidad_canal=0      
-        entropia_salida=0 #H(B)
-        entropia_equivocacion=0 #H(B/A)
-        probabilidades_salida=[] #p(bj)
-        probabilidades_condicionales=[] #p(bj/ai)
-        
-        #calculo H(B)
-        for i in range(tamanio_canal):
-            pb=0
-            for j in range(tamanio_canal):
-                if(matriz[j][i]!= 0):#verificar que p(bj/ai) no sea 0
-                    pb+=probabilidades_entrada[j]*matriz[j][i]
-            probabilidades_salida.append(pb)
-            entropia_salida+= pb*math.log2(1/pb)
+            #creo las probabilidades de entrada
+            #for i in range(tamanio_canal):
+             #   probabilidades_entrada.append(1/tamanio_canal)
+                
+            #calculo capacidad de canal
+            capacidad_canal=0      
+            entropia_salida=0 #H(B)
+            entropia_equivocacion=0 #H(B/A)
+            probabilidades_salida=[] #p(bj)
+            probabilidades_condicionales=[] #p(bj/ai)
+            
+            #calculo H(B)
+            for i in range(tamanio_canal):
+                pb=0
+                for j in range(tamanio_canal):
+                    if(matriz[j][i]!= 0):#verificar que p(bj/ai) no sea 0
+                        pb+=probabilidades_entrada[j]*matriz[j][i]
+                probabilidades_salida.append(pb)
+                entropia_salida+= pb*math.log2(1/pb)
 
-        #calculo H(B/A)
-        for i in range(tamanio_canal):
-            pcondicional=0
-            for j in range(tamanio_canal):
-                if(matriz[i][j]!= 0):#verificar que p(bj/ai) no sea 0
-                    pcondicional+=probabilidades_entrada[i]*matriz[i][j]*math.log2(1/matriz[i][j])
-            probabilidades_condicionales.append(pcondicional)
-            entropia_equivocacion+= pcondicional
+            #calculo H(B/A)
+            for i in range(tamanio_canal):
+                pcondicional=0
+                for j in range(tamanio_canal):
+                    if(matriz[i][j]!= 0):#verificar que p(bj/ai) no sea 0
+                        pcondicional+=probabilidades_entrada[i]*matriz[i][j]*math.log2(1/matriz[i][j])
+                probabilidades_condicionales.append(pcondicional)
+                entropia_equivocacion+= pcondicional
+            
+            #I(A,B)= H(B)-H(B/A) con p(ai) equiprobables se obtiene la informacion maxima que es la capacidad del canal
+            capacidad_canal = entropia_salida-entropia_equivocacion
+            if maxima_entropia<capacidad_canal:
+                maxima_entropia=capacidad_canal
+                probabilidad1= probabilidades_entrada[0]
+                probabilidad2 = probabilidades_entrada[1]
         
-        #I(A,B)= H(B)-H(B/A) con p(ai) equiprobables se obtiene la informacion maxima que es la capacidad del canal
-        capacidad_canal = entropia_salida-entropia_equivocacion
-        
-        messagebox.showinfo("Resultado", f"Las probabilidades que maximizan la capacidad de canal son: {probabilidades_entrada}\nLa capacidad de canal es: {capacidad_canal}")
+        messagebox.showinfo("Resultado", f"Las probabilidades que maximizan la capacidad de canal son: {probabilidad1, probabilidad2}\nLa capacidad de canal es: {maxima_entropia}")
     except ZeroDivisionError as z:
         messagebox.showerror("Error", f"Error en los valores ingresados: {z}")  
 def main (entry_matrix):
@@ -87,25 +95,4 @@ def main (entry_matrix):
 
     except ValueError as e:
         messagebox.showerror("Error", f"Error en los valores ingresados: {e}")
-
- 
-
-
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
 
